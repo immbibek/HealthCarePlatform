@@ -6,6 +6,8 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io/)
+[![Stripe](https://img.shields.io/badge/Stripe-626CD9?style=for-the-badge&logo=Stripe&logoColor=white)](https://stripe.com/)
+[![Razorpay](https://img.shields.io/badge/Razorpay-02042B?style=for-the-badge&logo=razorpay&logoColor=3395FF)](https://razorpay.com/)
 
 > 📅 A comprehensive doctor appointment booking platform built with the MERN stack
 
@@ -19,6 +21,7 @@ Prescripto is a full-featured healthcare appointment management system that conn
 - 🔐 Secure user authentication and registration
 - 🔍 Advanced doctor search by specialty, location, and availability
 - 📅 Easy appointment booking with real-time availability
+- 💳 Secure payment processing (Stripe & Razorpay)
 - 📋 Comprehensive appointment history tracking
 - 👨‍⚕️ Detailed doctor profiles and ratings
 - ⚙️ Personal profile management and settings
@@ -29,6 +32,7 @@ Prescripto is a full-featured healthcare appointment management system that conn
 - 📊 Patient appointment overview and history
 - 👤 Professional profile customization
 - 📈 Appointment analytics and insights
+- 💰 Payment and earnings tracking
 
 ### 🛡️ **Admin Features**
 - 🎛️ Comprehensive admin panel
@@ -36,13 +40,11 @@ Prescripto is a full-featured healthcare appointment management system that conn
 - 📊 Platform analytics and reporting
 - 🔧 System configuration and maintenance
 - 📋 Appointment oversight and management
+- 💳 Payment gateway management
 
----
 ---
 
 ## 📸 Screenshots
-
-<!-- Add your screenshots here -->
 
 ### **Homepage**
 ![Homepage](assets/Homepage.png)
@@ -82,6 +84,8 @@ Prescripto is a full-featured healthcare appointment management system that conn
 - 🍃 **MongoDB** - NoSQL database for flexible data storage
 - 🔒 **JWT** - JSON Web Tokens for secure authentication
 - 🛡️ **bcrypt** - Password hashing library for enhanced security
+- 💳 **Stripe** - International payment processing
+- 💰 **Razorpay** - Indian payment gateway integration
 
 ---
 
@@ -91,10 +95,12 @@ Prescripto is a full-featured healthcare appointment management system that conn
 - Node.js (v14 or higher)
 - MongoDB (local or cloud instance)
 - Git
+- Stripe Account (for payment processing)
+- Razorpay Account (for Indian payments)
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/prescripto.git
+git clone https://github.com/immbibek/Healthcareplatform.git
 cd prescripto
 ```
 
@@ -123,10 +129,19 @@ JWT_SECRET=your_super_secret_jwt_key_here
 PORT=5000
 NODE_ENV=development
 
-# Additional configurations (if needed)
+# Cloudinary Configuration (for image uploads)
 CLOUDINARY_API_KEY=your_cloudinary_api_key
 CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 CLOUDINARY_CLOUD_NAME=your_cloud_name
+
+# Payment Gateway Configuration
+# Stripe Configuration
+STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+
+# Razorpay Configuration
+RAZORPAY_KEY_ID=rzp_test_your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
 **Start the backend server:**
@@ -150,6 +165,10 @@ touch .env
 **Configure your frontend `.env` file:**
 ```env
 VITE_API_URL=http://localhost:5000/api
+
+# Payment Gateway Public Keys
+VITE_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+VITE_RAZORPAY_KEY_ID=rzp_test_your_razorpay_key_id
 ```
 
 **Start the frontend development server:**
@@ -160,6 +179,18 @@ npm run dev
 
 ### **4. Database Setup**
 Make sure MongoDB is running on your system or you have a valid MongoDB Atlas connection string configured in your backend `.env` file.
+
+### **5. Payment Gateway Setup**
+
+#### **Stripe Setup:**
+1. Create a Stripe account at [stripe.com](https://stripe.com)
+2. Get your API keys from the Stripe Dashboard
+3. Add the keys to your `.env` files
+
+#### **Razorpay Setup:**
+1. Create a Razorpay account at [razorpay.com](https://razorpay.com)
+2. Get your Key ID and Secret from the Razorpay Dashboard
+3. Add the keys to your `.env` files
 
 ---
 
@@ -209,14 +240,16 @@ prescripto/
    - Use the search functionality to find doctors
    - Filter by specialty, location, or availability
    - Select your preferred doctor and time slot
-   - Confirm your appointment details
-   - Receive confirmation notification
+   - Choose payment method (Stripe or Razorpay)
+   - Complete secure payment processing
+   - Receive confirmation notification and receipt
 
 3. **Managing Appointments** 📋
    - View upcoming appointments in your dashboard
    - Access your appointment history
+   - Download payment receipts and invoices
    - Reschedule or cancel appointments if needed
-   - Download appointment receipts
+   - Track payment status and refunds
 
 ### **For Doctors**
 
@@ -237,6 +270,7 @@ prescripto/
    - Access patient information
    - Update appointment status
    - Generate reports and analytics
+   - Track earnings and payments
 
 ### **For Administrators**
 
@@ -255,10 +289,40 @@ prescripto/
 3. **Platform Management** 🎛️
    - Monitor system health and performance
    - Configure platform settings
-   - Manage payment processing
-   - Generate comprehensive reports
+   - Manage payment gateway settings (Stripe & Razorpay)
+   - Handle payment disputes and refunds
+   - Generate financial and transaction reports
+   - Monitor payment analytics and trends
 
+---
 
+## 💳 Payment Integration
+
+### **Supported Payment Methods**
+
+#### **Stripe (International)**
+- Credit/Debit Cards (Visa, Mastercard, American Express)
+- Digital Wallets (Apple Pay, Google Pay)
+- Bank Transfers (ACH, SEPA)
+- Multiple Currency Support
+
+#### **Razorpay (India)**
+- Credit/Debit Cards
+- Net Banking
+- UPI (Unified Payments Interface)
+- Digital Wallets (Paytm, PhonePe, Google Pay)
+- EMI Options
+
+### **Payment Flow**
+1. Patient selects doctor and time slot
+2. System calculates total fee
+3. Patient chooses payment method
+4. Secure payment processing
+5. Payment confirmation and receipt
+6. Appointment confirmed
+7. Email/SMS notifications sent
+
+---
 
 ## 🤝 Contributing
 
@@ -329,7 +393,7 @@ SOFTWARE.
 - 📧 **Email**: bibekchy2022@gmail.com
 - 🐛 **Issues**: [GitHub Issues](https://github.com/immbibek/Healthcareplatform/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/immbibek/Healthcareplatform/discussions)
-- 📚 **Documentation**: [Wiki](https://github.com/immbibek/Healthcarepaltform/wiki)
+- 📚 **Documentation**: [Wiki](https://github.com/immbibek/Healthcareplatform/wiki)
 
 ---
 
